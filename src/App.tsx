@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import ProductList from './components/ProductList';
 import { AddToCartCallback } from './lib/Cart';
 
@@ -8,7 +8,11 @@ function App() {
   //as it is; I only really need to slightly nest the data so it's not
   //too complicated to keep a track of.
 
-  // const addToCart = (): AddToCartCallback
+  const [state, dispatch] = useReducer(first, second, third);
+
+  const addToCart: AddToCartCallback = (id: number, count: number) => {
+
+  }
 
   return (
     <div>
