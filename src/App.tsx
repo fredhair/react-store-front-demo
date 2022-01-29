@@ -1,24 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import ProductList from './components/ProductList';
+import { AddToCartCallback } from './lib/Cart';
 
 function App() {
+
+  //If this were a larger app I would be using context for the cart,
+  //as it is; I only really need to slightly nest the data so it's not
+  //too complicated to keep a track of.
+
+  // const addToCart = (): AddToCartCallback
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className="bg-purple-700 text-white">
+        <header className="text-center py-4">
+          <h1 className="text-xl">Storefront Demo With React</h1>
+        </header>
+      </div>
+      <main>
+        <div className="container mx-auto">
+          <div className="my-4">
+            <ProductList query=''></ProductList>
+          </div>
+        </div>
+      </main>
     </div>
   );
 }
