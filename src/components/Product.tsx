@@ -1,23 +1,24 @@
 import React from 'react';
-import { AddToCartCallback, RemoveFromCartCallback } from '../lib/Cart';
+import { CartDispatch } from '../lib/Cart';
 import { IProduct } from '../lib/Products';
+import CartControls from './CartControls';
 
 interface IProps {
     product: IProduct;
-    onAddToCart: AddToCartCallback
-    onRemoveFromCart: RemoveFromCartCallback
+    cartDispatch: CartDispatch;
 }
 
-function Product({ product: {id, name, price, category, barcode, description } }: IProps) {
+function Product({ product, cartDispatch }: IProps) {
     return (
-        <div className="rounded shadow-sm bg-gray-200 p-2">
-            <div className="flex flex-col text-center">
+        <div className="rounded shadow-sm bg-purple-900 text-white p-2">
+            <div className="flex flex-col gap-2 items-center h-full justify-between">
                 <div>
-                    <span className="text-lg font-bold">{name}</span>
+                    <span className="text-lg font-bold">{product.name}</span>
                     {' - '}
-                    <span className="mt-2">£{price}</span>
+                    <span className="mt-2">£{product.price.toFixed(2)}</span>
                 </div>
-                <p className="mt-2">{description}</p>
+                <p className="my-2">{product.description}</p>
+                <CartControls hideRemoveButton hideRemoveAllButton productId={product.id} cartDispatch={cartDispatch} />
             </div>
         </div>
     );

@@ -1,25 +1,24 @@
-import React from 'react';
 import Product from './Product';
 import { filterProducts } from '../lib/Products';
+import { CartDispatch } from '../lib/Cart';
 
 interface IProps {
-    query: string;
-    onAddToCart: AddToCartCallback
-    onRemoveFromCart: RemoveFromCartCallback
+    query?: string;
+    cartDispatch: CartDispatch;
 }
 
 function ProductList(props: IProps) {
 
-    const shownProducts = filterProducts(props.query).map(product => (
+    const shownProducts = filterProducts(props.query ?? "").map(product => (
         <Product 
             product={product}
-            onAddToCart={props.onAddToCart}
-            onRemoveFromCart={props.onRemoveFromCart}
+            cartDispatch={props.cartDispatch}
+            key={product.id}
         />
     ));
 
     return (
-        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
           {shownProducts}
         </div>
     );

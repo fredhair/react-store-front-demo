@@ -11,6 +11,10 @@ export const filterProducts = (query: string): Array<IProduct> => {
     return Products;
 }
 
+export const getProductById = (id: number): IProduct | undefined => {
+    return Products.find(product => product.id === id);
+}
+
 const Products: Array<IProduct> = [
     {
         "id": 0,

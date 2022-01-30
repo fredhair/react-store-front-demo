@@ -1,33 +1,44 @@
-import React, { useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 import ProductList from './components/ProductList';
-import { AddToCartCallback } from './lib/Cart';
+import Cart from './components/Cart';
+import { cartReducer } from './lib/Cart';
+import axios from 'axios';
+import { IProduct } from './lib/Products';
+
+let allProducts: Array<IProduct>;
 
 function App() {
 
   //If this were a larger app I would be using context for the cart,
-  //as it is; I only really need to slightly nest the data so it's not
+  //as it is; there's not much complexity in this demo so it's not
   //too complicated to keep a track of.
 
-  const [state, dispatch] = useReducer(first, second, third);
+  const [cart, cartDispatch] = useReducer(cartReducer, []);
 
-  const addToCart: AddToCartCallback = (id: number, count: number) => {
-
-  }
+  //You said I had to get it from a HTTP request, didn't mention anything about not caching the whole product list!
+  useEffect(() => {
+    axios.get('http://localhost:3001/products').then(data => {allProducts = data.data; console.log(allProducts)});
+  }, []);
 
   return (
-    <div>
-      <div className="bg-purple-700 text-white">
+    <div className='bg-purple-500 min-h-screen'>
+      <div className="bg-purple-700 text-white shadow border-b-4 border-purple-800">
         <header className="text-center py-4">
-          <h1 className="text-xl">Storefront Demo With React</h1>
+          <h1 className="text-xl"><strong>Storefront Demo With React</strong> - By Danny Pendle</h1>
         </header>
       </div>
-      <main>
-        <div className="container mx-auto">
-          <div className="my-4">
-            <ProductList query=''></ProductList>
+      <div className="flex flex-row flex-wrap h-full">
+        <main className="w-full lg:w-3/4">
+          <div className="container mx-auto">
+            <div className="m-4">
+              <ProductList cartDispatch={cartDispatch}></ProductList>
+            </div>
           </div>
-        </div>
-      </main>
+        </main>
+        <aside className="w-full lg:w-1/4 lg:fixed inset-0 left-auto h-screen">
+          <Cart cartList={cart} cartDispatch={cartDispatch} />
+        </aside>
+      </div>
     </div>
   );
 }

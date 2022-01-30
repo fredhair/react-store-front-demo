@@ -4,8 +4,8 @@
 //An interface is a contract, it describes the required members
 //i.e. data and functions that allow a type to fulfill that contract.
 
-export type AddToCartCallback = (id: number, count: number) => void;
-export type RemoveFromCartCallback = (id: number, count: number) => void;
+// export type AddToCartCallback = (id: number, count: number) => void;
+// export type RemoveFromCartCallback = (id: number, count: number) => void;
 
 export interface ICartListEntry {
     id: number;
@@ -26,9 +26,14 @@ export type CartActionState = {
     payload: ICartListEntry
 }
 
+export type CartDispatch = React.Dispatch<CartActionState>
+
 export const cartReducer = (state: CartList, action: CartActionState) => {
     switch (action.type) {
         case CartAction.ADD:
+            if(!state.find(item => item.id === action.payload.id)) {
+                return [...state, action.payload];
+            }
             return state.map(item => item.id === action.payload.id ? { id: item.id, count: item.count + action.payload.count } : item);
         case CartAction.REMOVE:
             return state.reduce((prevItems: CartList, item: ICartListEntry) => {
@@ -44,6 +49,6 @@ export const cartReducer = (state: CartList, action: CartActionState) => {
         default:
             //throw new Error();
             return state;
-    
+
     }
-}
+};
