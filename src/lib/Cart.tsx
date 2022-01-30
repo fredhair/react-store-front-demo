@@ -19,6 +19,7 @@ export enum CartAction {
     ADD = "ADD",
     REMOVE = "REMOVE",
     REMOVE_ALL = "REMOVE_ALL",
+    EMPTY_EVERYTHING = "EMPTY_EVERYTHING",
 }
 
 export type CartActionState = {
@@ -46,6 +47,8 @@ export const cartReducer = (state: CartList, action: CartActionState) => {
             }, []);
         case CartAction.REMOVE_ALL:
             return state.filter(item => item.id !== action.payload.id);
+        case CartAction.EMPTY_EVERYTHING:
+            return [];
         default:
             //throw new Error();
             return state;
