@@ -5,6 +5,7 @@ import { cartReducer } from './lib/Cart';
 import axios from 'axios';
 import { IProduct } from './lib/Products';
 import ProductContext from './components/ProductContext';
+import ProductSearch from './components/Search';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
   //as does storing the product data in the product component AND the cart list. 
   //So I've got a global context of all the available products.
   const [allProducts, setAllProducts] = useState<IProduct[]>([]);
+  const [productSearch, setProductSearch] = useState('');
   const [cart, cartDispatch] = useReducer(cartReducer, []);
 
   //You said I had to get it from a HTTP request, didn't mention anything about not caching the whole product list
@@ -40,7 +42,11 @@ function App() {
           <main className="w-full lg:w-3/4">
             <div className="container mx-auto">
               <div className="m-4">
-                <ProductList cartDispatch={cartDispatch}></ProductList>
+                <div className="my-4">
+                  <ProductSearch searchCallback={setProductSearch} placeholder="Product name or barcode (EAN)" className="w-full px-2 py-1 rounded" />
+                  {/* Categories filter goes here */}
+                </div>
+                <ProductList cartDispatch={cartDispatch} query={productSearch} />
               </div>
             </div>
           </main>

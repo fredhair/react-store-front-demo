@@ -18,6 +18,7 @@ function Product({ product, cartDispatch }: IProps) {
                     <span className="mt-2">£{product.price.toFixed(2)}</span>
                 </div>
                 <p className="my-2">{product.description}</p>
+                <p className="my-2">EAN - {product.barcode}</p>
                 <CartControls hideRemoveButton hideRemoveAllButton productId={product.id} cartDispatch={cartDispatch} />
             </div>
         </div>
