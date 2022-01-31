@@ -39,8 +39,7 @@ export const cartReducer = (state: CartList, action: CartActionState) => {
         case CartAction.REMOVE:
             return state.reduce((prevItems: CartList, item: ICartListEntry) => {
                 if (item.id === action.payload.id) {
-                    item.count -= action.payload.count;
-                    return item.count > 0 ? [...prevItems, item] : prevItems;
+                    return item.count - action.payload.count > 0 ? [...prevItems, {id: item.id, count: item.count - action.payload.count}] : prevItems;
                 } else {
                     return [...prevItems, item];
                 }

@@ -10,6 +10,16 @@ router.get('/products', (req, res) => {
     //etc
 });
 
+// Would cache this kinda stuff in prod
+router.get('/categories', (req, res) => {
+    //Get all unique categories
+    let categories = [];
+
+    products.forEach(el => categories.includes(el.category) ? null : categories.push(el.category));
+
+    return res.json(categories);
+});
+
 router.post('/checkout', (req, res) => {
     //Send okay, could take the cart in the body and send back a confirmation
     //but seems a little pointless just resending back the same info.

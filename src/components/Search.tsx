@@ -5,7 +5,7 @@ interface IProps {
     label?: string;
 }
 
-function ProductSearch({ searchCallback, label = 'Search', ...props }: IProps & React.HTMLAttributes<HTMLInputElement>) {
+function Search({ searchCallback, label = 'Search', ...props }: IProps & React.HTMLAttributes<HTMLInputElement>) {
     return (
         <div>
             <label className="text-white" htmlFor="search">{label}</label>
@@ -14,4 +14,4 @@ function ProductSearch({ searchCallback, label = 'Search', ...props }: IProps & 
     );
 }
 
-export default ProductSearch;
+export default Search;
