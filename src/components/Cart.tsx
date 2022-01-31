@@ -1,7 +1,8 @@
-import { useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import { CartAction, CartDispatch, CartList } from "../lib/Cart";
-import { getProductById } from '../lib/Products';
+import { IProduct } from "../lib/Products";
 import CartControls from './CartControls';
+import ProductContext from "./ProductContext";
 
 interface IProps {
     cartList: CartList;
@@ -11,6 +12,12 @@ interface IProps {
 function Cart({ cartList, cartDispatch }: IProps) {
 
     const [cartTotal, setCartTotal] = useState(0);
+
+    const Products = useContext(ProductContext);
+
+    const getProductById = (id: number): IProduct | undefined => {
+        return Products.find(product => product.id === id);
+    }
 
     const cartElements = useMemo(() => {
         let total = 0;
