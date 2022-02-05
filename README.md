@@ -1,8 +1,6 @@
 # Store front Demo
 
-Unfortunately I didn't have as much time as I'd have liked to spend on this and it became clear that I wouldn't be able to learn Angular and build this app within a couple of hours.
-I made a start on an Angular version but am still very much learning the ropes yet and have been very busy with other commitments.
-So this app took me a couple of hours to build overall though I wish I'd had more free time this weekend to demonstrate my abilities.
+React Version of a simple store front. Angular version coming soon.
 
 ### The App:
 
